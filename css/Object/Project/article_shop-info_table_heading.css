@@ -1,0 +1,19 @@
+.article_shop-info_table_heading--pc {
+  font-family: "Noto Serif JP", serif;
+  color: #fff;
+  font-weight: 500;
+  font-size: max(2.6075619296vw, 20px);
+  line-height: 1.4615384615;
+  letter-spacing: 0.1em;
+  margin-bottom: max(5.2151238592vw, 40px);
+  display: inline-block;
+  display: none;
+}
+@media screen and (min-width: 1025px) {
+  .article_shop-info_table_heading--pc {
+    font-size: max(1.9033674963vw, 26px);
+    margin-bottom: max(2.7818448023vw, 38px);
+    line-height: 1.4230769231;
+  }
+}
+/*# sourceMappingURL=article_shop-info_table_heading.css.map */
