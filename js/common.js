@@ -7,7 +7,11 @@ const myTargetSansai = document.querySelector('.is-target__sansai');
 const myTargetSakuranbo = document.querySelector('.is-target__sakuranbo');
 */
 
-const myTarget = document.querySelectorAll('.is-target');
+//これだと上手くいかないので
+//const myTarget = document.querySelectorAll('.is-target');
+
+//dataの方ではどうか？
+const myTarget = document.querySelectorAll('[data-nav-number]')
 
 //これも共通にして、querySelectorAllとかにしてノードリストとして処理できるのでは？
 const navTakenoko = document.querySelector('.p-nav__item__link--takenoko');
@@ -35,10 +39,22 @@ function myIntersect(entries, myObserver) {
     entries.forEach((entry) => {
       if (entries[0].isIntersecting) {
         //navTakenoko.classList.remove('is-target__takenoko');
-        navTakenoko.classList.add('is-active');
-      } else {
-        navTakenoko.classList.remove('is-active');
-        //navTakenoko.classList.add('is-target__takenoko');
+        navTakenoko.classList.toggle('is-active');
+        
+      } else if(entries[1].isIntersecting) {
+        navAsari.classList.toggle('is-active');
+      
+      } else if(entries[2].isIntersecting) {
+        navNanohana.classList.toggle('is-active');
+
+      } else if(entries[3].isIntersecting) {
+        navSansai.classList.toggle('is-active');
+      
+      } else if(entries[4].isIntersecting) {
+        navSakuranbo.classList.toggle('is-active');
+      
+      }else{
+        return;
       }
   });
   console.log(entries);
