@@ -9,7 +9,7 @@ const myTargetSakuranbo = document.querySelector('.is-target__sakuranbo');
 
 const myTarget = document.querySelectorAll('.is-target');
 
-//配列として変数に入れれないか？
+//これも共通にして、querySelectorAllとかにしてノードリストとして処理できるのでは？
 const navTakenoko = document.querySelector('.p-nav__item__link--takenoko');
 const navAsari = document.querySelector('.p-nav__item__link--asari');
 const navNanohana = document.querySelector('.p-nav__item__link--nanohana');
@@ -25,11 +25,15 @@ let myOptions = {
   
 // myObserverにIntersectionObserverのインスタンスを代入
 const myObserver = new IntersectionObserver(myIntersect, myOptions);
-myObserverTakenoko.observe(myTarget);
 
-function myIntersect(entries, myIntersectTakenoko) {
+  // 複数の対象要素を監視
+  for (let n = 0; n < myTarget.length; n++) {
+    myObserver.observe(myTarget[n]);
+  }
+
+function myIntersect(entries, myObserver) {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
+      if (entries[0].isIntersecting) {
         //navTakenoko.classList.remove('is-target__takenoko');
         navTakenoko.classList.add('is-active');
       } else {
@@ -37,4 +41,5 @@ function myIntersect(entries, myIntersectTakenoko) {
         //navTakenoko.classList.add('is-target__takenoko');
       }
   });
+  console.log(entries);
 }
