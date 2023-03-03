@@ -11,7 +11,7 @@ const myTargetSakuranbo = document.querySelector('.is-target__sakuranbo');
 //const myTarget = document.querySelectorAll('.is-target');
 
 //dataの方ではどうか？
-const myTarget = document.querySelectorAll('[data-nav-number]')
+const myTarget = document.querySelectorAll('[data-nav-number]');
 
 //これも共通にして、querySelectorAllとかにしてノードリストとして処理できるのでは？
 const navTakenoko = document.querySelector('.p-nav__item__link--takenoko');
@@ -35,6 +35,7 @@ const myObserver = new IntersectionObserver(myIntersect, myOptions);
     myObserver.observe(myTarget[n]);
   }
 
+  /*
 function myIntersect(entries, myObserver) {
     entries.forEach((entry) => {
       if (entries[0].isIntersecting) {
@@ -57,5 +58,12 @@ function myIntersect(entries, myObserver) {
         return;
       }
   });
-  console.log(entries);
+  console.log(myTarget[1]);
 }
+*/
+
+function myIntersect(entries, myObserver) {
+  entries.forEach((entry) => {
+    console.log(myTarget[4].getAttribute('data-nav-number'));
+  })
+}    
