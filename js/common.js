@@ -1,24 +1,7 @@
-//本当は.is-targetとかにしてquerySelectorAllでノードリストとして処理したい
-/*
-const myTargetTakenoko = document.querySelector('.is-target__takenoko');
-const myTargetAsari = document.querySelector('.is-target__asari');
-const myTargetNanohana = document.querySelector('.is-target__nanohana');
-const myTargetSansai = document.querySelector('.is-target__sansai');
-const myTargetSakuranbo = document.querySelector('.is-target__sakuranbo');
-*/
-
-//これだと上手くいかないので
-//const myTarget = document.querySelectorAll('.is-target');
-
 //dataの方ではどうか？
 const myTarget = document.querySelectorAll('[data-nav-number]');
 
-//これも共通にして、querySelectorAllとかにしてノードリストとして処理できるのでは？
-const navTakenoko = document.querySelector('.p-nav__item__link--takenoko');
-const navAsari = document.querySelector('.p-nav__item__link--asari');
-const navNanohana = document.querySelector('.p-nav__item__link--nanohana');
-const navSansai = document.querySelector('.p-nav__item__link--sansai');
-const navSakuranbo = document.querySelector('.p-nav__item__link--sakuranbo');
+const myNavTarget = document.querySelectorAll('.is-nav-target');
 
 // IntersectionObserverのオプション設定　...手順(3)の部分
 let myOptions = {
@@ -35,32 +18,67 @@ const myObserver = new IntersectionObserver(myIntersect, myOptions);
     myObserver.observe(myTarget[n]);
   }
 
-  /*
-function myIntersect(entries, myObserver) {
+  //完成コード
+  function myIntersect(entries, myObserver) {
     entries.forEach((entry) => {
-      if (entries[0].isIntersecting) {
-        //navTakenoko.classList.remove('is-target__takenoko');
-        navTakenoko.classList.toggle('is-active');
+      if (entry.isIntersecting) {
+        //下から戻ってきたときにたけのこに付与されているis-activeを削除する
+        if (entry.target.getAttribute('data-nav-number') == 0) {
+          myNavTarget[0].classList.remove('is-active');
         
-      } else if(entries[1].isIntersecting) {
-        navAsari.classList.toggle('is-active');
-      
-      } else if(entries[2].isIntersecting) {
-        navNanohana.classList.toggle('is-active');
-
-      } else if(entries[3].isIntersecting) {
-        navSansai.classList.toggle('is-active');
-      
-      } else if(entries[4].isIntersecting) {
-        navSakuranbo.classList.toggle('is-active');
-      
-      }else{
-        return;
-      }
-  });
-  console.log(myTarget[1]);
-}
-*/
+          //たけのこ
+        }else if (entry.target.getAttribute('data-nav-number') == 1) {
+          myNavTarget[0].classList.remove('is-target__takenoko');
+          myNavTarget[0].classList.add('is-active');
+          console.log(myNavTarget);
+          //console.log(myTarget[0].getAttribute('data-nav-number'));
+          
+          //下から戻るとき
+          myNavTarget[1].classList.remove('is-active');
+        
+        } else if(entry.target.getAttribute('data-nav-number') == 2) {
+          //上のis-activeを削除
+          myNavTarget[0].classList.remove('is-active');
+          
+          myNavTarget[1].classList.remove('is-target__asari');
+          myNavTarget[1].classList.add('is-active');
+  
+          //下から戻るとき
+          myNavTarget[2].classList.remove('is-active');
+          
+        //菜の花
+        } else if(entry.target.getAttribute('data-nav-number') == 3) {
+          //上のis-activeを削除する
+          myNavTarget[1].classList.remove('is-active');
+          
+          myNavTarget[2].classList.remove('is-target__nanohana');
+          myNavTarget[2].classList.add('is-active');
+          
+          //下から戻るとき
+          myNavTarget[3].classList.remove('is-active');
+          
+        //山菜
+      } else if(entry.target.getAttribute('data-nav-number') == 4) {
+          //上のis-activeを削除する
+          myNavTarget[2].classList.remove('is-active');
+          
+          myNavTarget[3].classList.remove('is-target__sansai');
+          myNavTarget[3].classList.add('is-active');
+          
+          //下から戻るとき
+          myNavTarget[4].classList.remove('is-active');
+          
+        //さくらんぼ
+      } else if(entry.target.getAttribute('data-nav-number') == 5) {
+          //上のis-activeを削除する
+          myNavTarget[3].classList.remove('is-active');
+              
+          myNavTarget[4].classList.remove('is-target__sakuranbo');
+          myNavTarget[4].classList.add('is-active');
+         }
+        }
+      })   
+    }  
 
 //本番用のコード
 //一応完成したが、改良の余地あり
@@ -112,24 +130,4 @@ function myIntersect(entries, myObserver) {
       }
     })   
   }
-*/
-
-/*
-//entriesについて調べる
-  function myIntersect(entries, myObserver) {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        //navTakenoko.classList.remove('is-target__takenoko');
-        //navTakenoko.classList.toggle('is-active');
-        //console.log(myTarget[0].getAttribute('data-nav-number'));
-        
-        //entryは入った要素
-        console.log(entry);
-        console.log(entries);
-        console.log(myTarget[0]);
-        console.log(myTarget[1]);
-        console.log(myTarget[2]);
-        } 
-      }
-    )}
 */
